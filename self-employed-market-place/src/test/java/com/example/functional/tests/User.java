@@ -22,5 +22,19 @@ public class User {
         Assert.assertEquals(resp.statusCode(), 200);
         System.out.println(resp.getBody().asString());
 
+        resp = RestAssured.given()
+                .contentType("application/json")
+                .get(endpoint + "/100");
+
+        Assert.assertEquals(resp.statusCode(), 404);
+        Assert.assertEquals(resp.getBody().asString(), "User with the id=100 not found");
+
+        resp = RestAssured.given()
+                .contentType("application/json")
+                .get(endpoint + "/3");
+
+        Assert.assertEquals(resp.statusCode(), 200);
+        Assert.assertEquals(resp.jsonPath().getString("name"), userEntity.getName());
+
     }
 }

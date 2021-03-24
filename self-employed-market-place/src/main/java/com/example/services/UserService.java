@@ -14,4 +14,8 @@ public class UserService {
     public UserEntity addUser(UserEntity userEntity) {
         return userRepository.save(userEntity);
     }
+
+    public UserEntity getUserById(long id) {
+        return userRepository.getById(id);
+    }
 }
