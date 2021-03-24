@@ -36,15 +36,15 @@ If we are Full Stack Engineer:  Build the service-side part along with the Front
         createdOn
         
 ###Endpoints:
-    1. /user - POST
-    2. /user/id - GET
+    1. /users - POST
+    2. /users/id - GET
     
     3. /projects -> POST
-    4. /projects -> GET
+    4. /projects -> GET (not implemented)
     
-    5. /project/{id} -> GET
-    6. /project/{id} -> PUT (not implemented)
-    7. /project/{id} -> DELETE (not implemented)
+    5. /projects/{id} -> GET
+    6. /projects/{id} -> PUT (not implemented)
+    7. /projects/{id} -> DELETE (not implemented)
     
-    8. /project/{id}/bids -> POST
-    9. /project/{id}/bids -> GET
+    8. /projects/{id}/bids -> POST
+    9. /projects/{id}/bids -> GET
