@@ -1,6 +1,6 @@
 package com.example.controller;
 
-import com.example.db.entities.UserEntity;
+import com.example.db.UserEntity;
 import com.example.exception.NotFoundException;
 import com.example.services.UserService;
 import org.slf4j.Logger;

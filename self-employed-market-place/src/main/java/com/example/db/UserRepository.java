@@ -1,6 +1,5 @@
-package com.example.db.repository;
+package com.example.db;
 
-import com.example.db.entities.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

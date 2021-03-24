@@ -1,10 +1,8 @@
-package com.example.db.entities;
+package com.example.db;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+@Table(name="user")
 @Entity
 public class UserEntity {
 
