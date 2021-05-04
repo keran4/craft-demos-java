@@ -48,3 +48,15 @@ If we are Full Stack Engineer:  Build the service-side part along with the Front
     
     8. /projects/{id}/bids -> POST
     9. /projects/{id}/bids -> GET
+
+
+### Scaling info
+
+    50K registered users
+    100 projects every day
+    50 bids per project, meaning 5K bids for projects on daily basis
+    
+### Assumption/Callouts
+    Can be easily scalled using relational database & a Spring boot application for the given requirement
+    User input is currently used to persist. An abstraction is needed to transform before peristing in DB, not doing that due to time constraints
+    

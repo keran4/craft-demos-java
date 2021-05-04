@@ -3,15 +3,20 @@ package com.example.functional.tests;
 import com.example.db.UserEntity;
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.response.Response;
+import org.springframework.beans.factory.annotation.Value;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class User {
+public class UsersTests extends TestBase{
 
-    private static final String endpoint = "http://localhost:8080/users";
+    @Value("${resource.users}")
+    private String usersResource;
 
-    @Test
+    @Test(invocationCount=5)
     public void addUserTest() {
+
+        final String endpoint = this.host + usersResource;
+
         UserEntity userEntity = new UserEntity("Donald Duck");
 
         Response resp = RestAssured.given()
@@ -35,6 +40,5 @@ public class User {
 
         Assert.assertEquals(resp.statusCode(), 200);
         Assert.assertEquals(resp.jsonPath().getString("name"), userEntity.getName());
-
     }
 }
