@@ -15,4 +15,8 @@ public class ProjectService {
         return projectRepository.save(projectEntity);
     }
 
+    public ProjectEntity getProject(Long id) {
+        return projectRepository.getById(id);
+    }
+
 }

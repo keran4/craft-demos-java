@@ -17,7 +17,7 @@ public class UserController {
     public UserService userService;
 
     @PostMapping("/users")
-    public UserEntity newUser(@RequestBody UserEntity userEntity) {
+    public UserEntity createUser(@RequestBody UserEntity userEntity) {
         UserEntity newUser = userService.addUser(userEntity);
         return newUser;
     }
@@ -27,8 +27,8 @@ public class UserController {
         UserEntity user = userService.getUserById(id);
 
         if (user == null) {
-            logger.warn("User with the id={} not found", id);
-            throw new NotFoundException("User with the id=" + id + " not found");
+            logger.warn("User not found, id={}", id);
+            throw new NotFoundException("User not found, id=" + id);
         }
         return user;
     }

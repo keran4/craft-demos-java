@@ -14,7 +14,7 @@ public class ProjectEntity {
     private Long id;
     private String name;
     private String details;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd@HH:mm:ss.SSSZ")
+    //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd@HH:mm:ss.SSSZ")
     private Date bidEnd; //Zoned date time ideal
     private Long creatorId;
     private Long winningBidId;

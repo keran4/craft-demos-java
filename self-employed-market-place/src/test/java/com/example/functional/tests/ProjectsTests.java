@@ -23,16 +23,8 @@ public class ProjectsTests extends TestBase{
 
         final String endpoint = this.host + projectsResource;
 
-        ProjectEntity projectEntity = new ProjectEntity();
-        projectEntity.setName("Donald Duck's 1st Project");
-        projectEntity.setDetails("This is a test project by Donald Duck");
-
         UserEntity newUser = createUser();
-        projectEntity.setCreatorId(newUser.getId());
-
-        Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.DATE, 1);
-        projectEntity.setBidEnd(cal.getTime());
+        ProjectEntity projectEntity = createProjectEntity(newUser);
 
         Response resp = RestAssured.given()
                 .contentType("application/json")
@@ -43,8 +35,41 @@ public class ProjectsTests extends TestBase{
 
         Assert.assertEquals(resp.jsonPath().getString("name"), projectEntity.getName());
         Assert.assertEquals(resp.jsonPath().getString("details"), projectEntity.getDetails());
-        Assert.assertEquals(resp.jsonPath().getString("creatorId"), String.valueOf(newUser.getId()));
+        Assert.assertEquals(resp.jsonPath().getString("creatorId"), newUser.getId().toString());
         Assert.assertNotNull(resp.jsonPath().getString("id"));
+    }
+
+    @Test
+    public void getProjectTest() {
+
+        final String endpoint = this.host + projectsResource;
+
+        ProjectEntity projectEntity = createProjectEntity(createUser());
+
+        Response resp = RestAssured.given()
+                .contentType("application/json")
+                .body(projectEntity)
+                .post(endpoint);
+
+        Assert.assertEquals(resp.statusCode(), 200);
+
+        projectEntity = resp.getBody().as(ProjectEntity.class);
+
+        final String getEndpoint = endpoint + "/" + projectEntity.getId();
+        resp = RestAssured.given()
+                .contentType("application/json")
+                .get(getEndpoint);
+
+        Assert.assertEquals(resp.statusCode(), 200);
+
+        Assert.assertEquals(resp.jsonPath().getString("id"), projectEntity.getId().toString());
+        Assert.assertEquals(resp.jsonPath().getString("name"), projectEntity.getName());
+
+        resp = RestAssured.given()
+                .contentType("application/json")
+                .get(endpoint + "/" + projectEntity.getId()+10000);
+
+        Assert.assertEquals(resp.statusCode(), 404);
     }
 
     private UserEntity createUser() {
@@ -59,6 +84,20 @@ public class ProjectsTests extends TestBase{
         Assert.assertEquals(resp.statusCode(), 200);
 
         return resp.body().as(UserEntity.class);
+    }
 
+    private ProjectEntity createProjectEntity(UserEntity user) {
+
+        ProjectEntity projectEntity = new ProjectEntity();
+        projectEntity.setName("Donald Duck's 1st Project");
+        projectEntity.setDetails("This is a test project by Donald Duck");
+
+        projectEntity.setCreatorId(user.getId());
+
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, 1);
+        projectEntity.setBidEnd(cal.getTime());
+
+        return projectEntity;
     }
 }

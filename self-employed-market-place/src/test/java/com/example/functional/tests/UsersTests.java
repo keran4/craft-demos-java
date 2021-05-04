@@ -32,7 +32,7 @@ public class UsersTests extends TestBase{
                 .get(endpoint + "/100");
 
         Assert.assertEquals(resp.statusCode(), 404);
-        Assert.assertEquals(resp.getBody().asString(), "User with the id=100 not found");
+        Assert.assertEquals(resp.getBody().asString(), "User not found, id=100");
 
         resp = RestAssured.given()
                 .contentType("application/json")
