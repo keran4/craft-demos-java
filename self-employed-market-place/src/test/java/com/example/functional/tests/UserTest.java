@@ -1,13 +1,14 @@
 package com.example.functional.tests;
 
 import com.example.db.UserEntity;
+import com.example.functional.TestBase;
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.response.Response;
 import org.springframework.beans.factory.annotation.Value;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class UsersTests extends TestBase{
+public class UserTest extends TestBase {
 
     @Value("${resource.users}")
     private String usersResource;

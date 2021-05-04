@@ -57,6 +57,9 @@ If we are Full Stack Engineer:  Build the service-side part along with the Front
     50 bids per project, meaning 5K bids for projects on daily basis
     
 ### Assumption/Callouts
+    Some of the end points & entity columns are planned/desired, but not implemented
     Can be easily scalled using relational database & a Spring boot application for the given requirement
     User input is currently used to persist. An abstraction is needed to transform before peristing in DB, not doing that due to time constraints
+    UI takes the responsibility of calculating the total price for the bid (toal hours * per hour, etc)
+    Ideal to have a validator service to take care of validation before DB action
     

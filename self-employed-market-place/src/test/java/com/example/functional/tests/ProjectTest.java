@@ -2,29 +2,32 @@ package com.example.functional.tests;
 
 import com.example.db.ProjectEntity;
 import com.example.db.UserEntity;
+import com.example.functional.TestBase;
+import com.example.functional.helper.TestDataCreateHelper;
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.response.Response;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.Calendar;
 
-public class ProjectsTests extends TestBase{
+public class ProjectTest extends TestBase {
 
     @Value("${resource.projects}")
     private String projectsResource;
 
-    @Value("${resource.users}")
-    private String usersResource;
+    @Autowired
+    private TestDataCreateHelper testDataCreateHelper;
 
     @Test
     public void addProjectsTest() {
 
         final String endpoint = this.host + projectsResource;
 
-        UserEntity newUser = createUser();
-        ProjectEntity projectEntity = createProjectEntity(newUser);
+        UserEntity seller = testDataCreateHelper.createUser();
+        ProjectEntity projectEntity = testDataCreateHelper.createProjectEntity(seller);
 
         Response resp = RestAssured.given()
                 .contentType("application/json")
@@ -35,7 +38,7 @@ public class ProjectsTests extends TestBase{
 
         Assert.assertEquals(resp.jsonPath().getString("name"), projectEntity.getName());
         Assert.assertEquals(resp.jsonPath().getString("details"), projectEntity.getDetails());
-        Assert.assertEquals(resp.jsonPath().getString("creatorId"), newUser.getId().toString());
+        Assert.assertEquals(resp.jsonPath().getString("creatorId"), seller.getId().toString());
         Assert.assertNotNull(resp.jsonPath().getString("id"));
     }
 
@@ -44,7 +47,7 @@ public class ProjectsTests extends TestBase{
 
         final String endpoint = this.host + projectsResource;
 
-        ProjectEntity projectEntity = createProjectEntity(createUser());
+        ProjectEntity projectEntity = testDataCreateHelper.createProjectEntity(testDataCreateHelper.createUser());
 
         Response resp = RestAssured.given()
                 .contentType("application/json")
@@ -72,32 +75,4 @@ public class ProjectsTests extends TestBase{
         Assert.assertEquals(resp.statusCode(), 404);
     }
 
-    private UserEntity createUser() {
-
-        UserEntity userEntity = new UserEntity("Donald Duck");
-
-        Response resp = RestAssured.given()
-                .contentType("application/json")
-                .body(userEntity)
-                .post(this.host + usersResource);
-
-        Assert.assertEquals(resp.statusCode(), 200);
-
-        return resp.body().as(UserEntity.class);
-    }
-
-    private ProjectEntity createProjectEntity(UserEntity user) {
-
-        ProjectEntity projectEntity = new ProjectEntity();
-        projectEntity.setName("Donald Duck's 1st Project");
-        projectEntity.setDetails("This is a test project by Donald Duck");
-
-        projectEntity.setCreatorId(user.getId());
-
-        Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.DATE, 1);
-        projectEntity.setBidEnd(cal.getTime());
-
-        return projectEntity;
-    }
 }

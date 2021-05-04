@@ -12,6 +12,7 @@ public class ProjectService {
     public ProjectRepository projectRepository;
 
     public ProjectEntity addProject(ProjectEntity projectEntity) {
+        //TODO: validate the creatorId, throw 400 if not found
         return projectRepository.save(projectEntity);
     }
 
