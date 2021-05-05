@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class ProjectController {
 
@@ -22,6 +24,11 @@ public class ProjectController {
         return newProject;
     }
 
+    @GetMapping("/projects")
+    public List<ProjectEntity> getProjects(@RequestParam (defaultValue = "0") int page_num, @RequestParam (defaultValue = "5") int page_size) {
+        return projectService.getLatestProjects(page_num,page_size);
+    }
+
     @GetMapping("/projects/{id}")
     public ProjectEntity getProject(@PathVariable Long id) {
         ProjectEntity project = projectService.getProject(id);
@@ -31,5 +38,4 @@ public class ProjectController {
         }
         return project;
     }
-
 }

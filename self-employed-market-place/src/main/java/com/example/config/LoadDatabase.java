@@ -2,7 +2,6 @@ package com.example.config;
 
 import com.example.db.UserEntity;
 import com.example.db.UserRepository;
-import com.example.utils.SerializationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
@@ -14,13 +13,12 @@ public class LoadDatabase {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private SerializationUtil serializationUtil;
-
     @PostConstruct
     public void initTables() {
+        System.out.println("================================================== Creating Sample Data ==================================================");
         userRepository.save(new UserEntity("John Smith"));
         userRepository.save(new UserEntity("Dane Smith"));
+        System.out.println("================================================== Sample Data Created ==================================================");
     }
 
 }

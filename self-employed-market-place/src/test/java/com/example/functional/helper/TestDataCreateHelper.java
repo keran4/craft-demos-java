@@ -6,6 +6,8 @@ import com.example.db.UserEntity;
 import com.example.functional.TestBase;
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.response.Response;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.testng.Assert;
@@ -26,6 +28,8 @@ public class TestDataCreateHelper extends TestBase {
 
     @Value("${host}")
     protected String host;
+
+    private static final Logger logger = LoggerFactory.getLogger(TestDataCreateHelper.class);
 
     public UserEntity createUser() {
 
@@ -64,6 +68,21 @@ public class TestDataCreateHelper extends TestBase {
                 .contentType("application/json")
                 .body(projectEntity)
                 .post(this.host + projectsResource);
+
+        Assert.assertEquals(resp.statusCode(), 200);
+
+        projectEntity = resp.getBody().as(ProjectEntity.class);
+
+        logger.info("Project Entity created, id=?", projectEntity.getId());
+
+        return projectEntity;
+    }
+
+    public ProjectEntity getProject(long projectId) {
+
+        Response resp = RestAssured.given()
+                .contentType("application/json")
+                .get(this.host + projectsResource + "/" + projectId);
 
         Assert.assertEquals(resp.statusCode(), 200);
 

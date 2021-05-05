@@ -16,6 +16,8 @@ public class ProjectEntity {
     private String details;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd@HH:mm:ss.SSSZ")
     private Date bidEnd; //Zoned date time ideal
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd@HH:mm:ss.SSSZ")
+    public Date createdOn;  //Zoned date time ideal
     private Long creatorId;
     private Long winningBidId;
 
@@ -65,5 +67,13 @@ public class ProjectEntity {
 
     public void setWinningBidId(Long winningBidId) {
         this.winningBidId = winningBidId;
+    }
+
+    public Date getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(Date createdOn) {
+        this.createdOn = createdOn;
     }
 }

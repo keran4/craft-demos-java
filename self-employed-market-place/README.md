@@ -49,6 +49,7 @@ If we are Full Stack Engineer:  Build the service-side part along with the Front
     8. /projects/{id}/bids -> POST
     9. /projects/{id}/bids -> GET
 
+******** TODO: Get top 100 projects endpoint
 
 ### Scaling info
 
