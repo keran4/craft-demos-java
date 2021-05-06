@@ -26,7 +26,8 @@ public class UserTest extends TestBase {
                 .post(endpoint);
 
         Assert.assertEquals(resp.statusCode(), 200);
-        System.out.println(resp.getBody().asString());
+
+        userEntity = resp.getBody().as(UserEntity.class);
 
         resp = RestAssured.given()
                 .contentType("application/json")
@@ -37,7 +38,7 @@ public class UserTest extends TestBase {
 
         resp = RestAssured.given()
                 .contentType("application/json")
-                .get(endpoint + "/3");
+                .get(endpoint + "/" + userEntity.getId());
 
         Assert.assertEquals(resp.statusCode(), 200);
         Assert.assertEquals(resp.jsonPath().getString("name"), userEntity.getName());

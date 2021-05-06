@@ -16,7 +16,7 @@ import java.util.List;
 public class ProjectService {
 
     @Autowired
-    public ProjectRepository projectRepository;
+    private ProjectRepository projectRepository;
 
     public ProjectEntity addProject(ProjectEntity projectEntity) {
         //TODO: validate the creatorId, throw 400 if not found

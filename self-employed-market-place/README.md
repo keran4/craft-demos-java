@@ -40,7 +40,7 @@ If we are Full Stack Engineer:  Build the service-side part along with the Front
     2. /users/id - GET
     
     3. /projects -> POST
-    4. /projects -> GET (not implemented)
+    4. /projects?page_num=0&page_size=5 -> GET
     
     5. /projects/{id} -> GET
     6. /projects/{id} -> PUT (not implemented)
@@ -49,7 +49,6 @@ If we are Full Stack Engineer:  Build the service-side part along with the Front
     8. /projects/{id}/bids -> POST
     9. /projects/{id}/bids -> GET
 
-******** TODO: Get top 100 projects endpoint
 
 ### Scaling info
 
@@ -64,3 +63,4 @@ If we are Full Stack Engineer:  Build the service-side part along with the Front
     UI takes the responsibility of calculating the total price for the bid (toal hours * per hour, etc)
     Ideal to have a validator service to take care of validation before DB action
     
+### Postman collection is available in home directory

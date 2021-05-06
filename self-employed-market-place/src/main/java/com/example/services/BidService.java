@@ -16,10 +16,10 @@ import java.util.List;
 public class BidService {
 
     @Autowired
-    public BidRepository bidRepository;
+    private BidRepository bidRepository;
 
     @Autowired
-    public ProjectRepository projectRepository;
+    private ProjectRepository projectRepository;
 
     @Transactional
     public BidEntity addBid(Long projectId, BidEntity bid) {
