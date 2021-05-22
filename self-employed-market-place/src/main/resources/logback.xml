@@ -12,6 +12,11 @@
 		</layout>
 	</appender>
 
+	<logger name="org.hibernate" additivity="false">
+		<level value="debug" />
+		<appender-ref ref="STDOUT" />
+	</logger>
+
 	<root level="INFO">
 		<appender-ref ref="STDOUT" />
 	</root>

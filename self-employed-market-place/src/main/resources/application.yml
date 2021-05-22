@@ -1,6 +1,12 @@
-
 h2.implicitRelativePath: true
-spring.datasource.url: jdbc:hsqldb:file:~/desktop/craftdb/craft.db
-spring.jpa.hibernate.ddl-auto: create
 
 spring.output.ansi.enabled: ALWAYS
+
+spring:
+  datasource.url: jdbc:hsqldb:file:~/desktop/craftdb/craft.db
+  jpa:
+    hibernate.ddl-auto: create
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql:true
